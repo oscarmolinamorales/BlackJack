@@ -41,36 +41,48 @@ void inicializaArray(int(&pArray)[13]) {
 }
 
 void resultado() {
-    if ((puntosJugador1 > puntosJugador2) && puntosJugador1 <= 21) {
+    if (puntosJugador1 == 21 || puntosJugador2 > 21) {
+        system("cls");
+        cout << "//////////////////////////////////////////////////////////\n";
+        system("color a");
+        cout << "MENUDA SUERTE!\nHAS GANADO!";
+        cout << "resultado Jugador:" << puntosJugador1 << "\nresultado Crupier:" << puntosJugador2;
+        
+    }
+
+    if (puntosJugador2 == 21 || puntosJugador1 > 21) {
+        system("cls");
+        cout << "//////////////////////////////////////////////////////////\n";
+        system("color a");
+        cout << "QUE PENA!\nHAS PERDIDO!";
+        cout << "resultado Jugador:" << puntosJugador1 << "\nresultado Crupier:" << puntosJugador2;
+        
+    }
+
+    if (puntosJugador1 == puntosJugador2 && retirada == true && retirada2 == true) {
+        system("cls");
+        cout << "//////////////////////////////////////////////////////////\n";
+        system("color a");
+        cout << "QUE PENA!\nHAS empatado!";
+        cout << "resultado Jugador:"<<puntosJugador1<<"\nresultado Crupier:"<<puntosJugador2;
+        
+
+    }
+
+    if (puntosJugador1 > puntosJugador2 && retirada == true && retirada2 == true) {
+        system("cls");
         cout << "//////////////////////////////////////////////////////////\n";
         system("color a");
         cout << "MENUDA SUERTE!\nHAS GANADO!";
         system("pause");
     }
-    else if ((puntosJugador2 <= 21) && puntosJugador2 > puntosJugador1) {
+    if (puntosJugador1 < puntosJugador2 && retirada == true && retirada2 == true) {
+        system("cls");
         cout << "//////////////////////////////////////////////////////////\n";
         system("color a");
         cout << "QUE PENA!\nHAS PERDIDO!";
         system("pause");
     }
-    else if (puntosJugador2 > 21 || puntosJugador1 > 21) {
-        cout << "//////////////////////////////////////////////////////////\n";
-        system("color a");
-        if (puntosJugador2 > 21) {
-            cout << "EL CRUPIER HA PERDIDO";
-        }
-        else {
-            cout << "QUE PENA!\nHAS PERDIDO!";
-        }
-        system("pause");
-    }
-    else if ((puntosJugador2 <= 21 && puntosJugador1 <= 21) && (puntosJugador2 == puntosJugador1)) {
-        cout << "//////////////////////////////////////////////////////////\n";
-        system("color a");
-        cout << "EMPATE";
-        system("pause");
-    }
-
 }
 
 //Comprobar cartas picas o diamantes o corazones o trebol
@@ -133,18 +145,13 @@ void eleccionCarta(int& totalPoints, string player) {
     else if (cartaInicial == 11 || cartaInicial == 12 || cartaInicial == 13) {
         totalPoints = totalPoints + 10;
         if(cartaInicial==11) {
-
             cout << "El jugador " << player << " ha sacado un J.\nTiene un total de " << totalPoints << endl;
-
         }
         else if(cartaInicial==12) {
-
             cout << "El jugador " << player << " ha sacado un Q.\nTiene un total de " << totalPoints << endl;
-
         }
         else {
-            cout << "El jugador " << player << " ha sacado un K.\nTiene un total de " << totalPoints << endl;
-            
+            cout << "El jugador " << player << " ha sacado un K.\nTiene un total de " << totalPoints << endl;           
         }
     }
 
@@ -215,4 +222,3 @@ int main() {
     }
     resultado();
 }
-
