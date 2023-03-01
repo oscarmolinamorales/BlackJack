@@ -1,4 +1,3 @@
-
 #include <iostream>
 
 using namespace std;
@@ -11,7 +10,7 @@ int trebol[13];
 bool finalJuego = false;
 
 //Variables Jugador 1
-string jugador1 ;
+string jugador1;
 int puntosJugador1 = 0;
 bool retirada = false;
 bool ganador = false;
@@ -41,47 +40,14 @@ void inicializaArray(int(&pArray)[13]) {
 }
 
 void resultado() {
-    if (puntosJugador1 == 21 || puntosJugador2 > 21) {
-        system("cls");
-        cout << "//////////////////////////////////////////////////////////\n";
-        system("color a");
-        cout << "MENUDA SUERTE!\nHAS GANADO!";
-        cout << "resultado Jugador:" << puntosJugador1 << "\nresultado Crupier:" << puntosJugador2;
-        
+    if ((puntosJugador1 < puntosJugador2 && puntosJugador2 <= 21) || (puntosJugador1 > 21)) {
+        cout << "LE CRUPIER HA GANADO" << "\n";
     }
-
-    if (puntosJugador2 == 21 || puntosJugador1 > 21) {
-        system("cls");
-        cout << "//////////////////////////////////////////////////////////\n";
-        system("color a");
-        cout << "QUE PENA!\nHAS PERDIDO!";
-        cout << "resultado Jugador:" << puntosJugador1 << "\nresultado Crupier:" << puntosJugador2;
-        
+    else if ((puntosJugador1 > puntosJugador2 && puntosJugador1 <= 21) || (puntosJugador2 > 21)) {
+        cout << "HAS GANADO! " << jugador1;
     }
-
-    if (puntosJugador1 == puntosJugador2 && retirada == true && retirada2 == true) {
-        system("cls");
-        cout << "//////////////////////////////////////////////////////////\n";
-        system("color a");
-        cout << "QUE PENA!\nHAS empatado!";
-        cout << "resultado Jugador:"<<puntosJugador1<<"\nresultado Crupier:"<<puntosJugador2;
-        
-
-    }
-
-    if (puntosJugador1 > puntosJugador2 && retirada == true && retirada2 == true) {
-        system("cls");
-        cout << "//////////////////////////////////////////////////////////\n";
-        system("color a");
-        cout << "MENUDA SUERTE!\nHAS GANADO!";
-        system("pause");
-    }
-    if (puntosJugador1 < puntosJugador2 && retirada == true && retirada2 == true) {
-        system("cls");
-        cout << "//////////////////////////////////////////////////////////\n";
-        system("color a");
-        cout << "QUE PENA!\nHAS PERDIDO!";
-        system("pause");
+    if (puntosJugador1 == puntosJugador2) {
+        cout << "EMPATE";
     }
 }
 
@@ -104,9 +70,9 @@ void eleccionCarta(int& totalPoints, string player) {
         }
         else if ((rand() % 4) == 1) {
             if (diamantes[cartaInicial] == 1) {
-            diamantes[cartaInicial] = 0;
-            eleccion = true;
-            tipoPalo = "diamantes";
+                diamantes[cartaInicial] = 0;
+                eleccion = true;
+                tipoPalo = "diamantes";
             }
         }
         else if ((rand() % 4) == 2) {
@@ -116,15 +82,15 @@ void eleccionCarta(int& totalPoints, string player) {
                 tipoPalo = "corazon";
             }
         }
-            else {              
-                trebol[cartaInicial] = 0;
-                eleccion = true;
-                tipoPalo = "trebol";
-            }
-        
+        else {
+            trebol[cartaInicial] = 0;
+            eleccion = true;
+            tipoPalo = "trebol";
+        }
+
     }
-    if (cartaInicial == 0 ) {
-        cout << "Menuda suerte acabas de tener! " << player << ".\nHa sacado un AS, que numero quieres elegir 1 o 11?"  << endl;
+    if (cartaInicial == 0) {
+        cout << "Menuda suerte acabas de tener! " << player << ".\nHa sacado un AS, que numero quieres elegir 1 o 11?" << endl;
         if (player == crupier) {
             if (puntosJugador2 <= 10) {
                 AS = 11;
@@ -136,7 +102,8 @@ void eleccionCarta(int& totalPoints, string player) {
                 puntosJugador2 = puntosJugador2 + AS;
                 cout << player << " ha elegido " << AS << ".\nAhora tienes un total de " << puntosJugador2 << " puntos" << endl;
             }
-        } else {
+        }
+        else {
             cin >> AS;
             totalPoints = totalPoints + AS;
             cout << player << " ha elegido un " << AS << ".\nAhora tienes un total de " << puntosJugador1 << " puntos" << endl;
@@ -144,24 +111,22 @@ void eleccionCarta(int& totalPoints, string player) {
     }
     else if (cartaInicial == 11 || cartaInicial == 12 || cartaInicial == 13) {
         totalPoints = totalPoints + 10;
-        if(cartaInicial==11) {
-            cout << "El jugador " << player << " ha sacado un J.\nTiene un total de " << totalPoints << endl;
+        if (cartaInicial == 11) {
+            cout << "El jugador " << player << " ha sacado un J de " << tipoPalo << ".\nTiene un total de " << totalPoints << endl;
         }
-        else if(cartaInicial==12) {
-            cout << "El jugador " << player << " ha sacado un Q.\nTiene un total de " << totalPoints << endl;
+        else if (cartaInicial == 12) {
+            cout << "El jugador " << player << " ha sacado un Q de " << tipoPalo << ".\nTiene un total de " << totalPoints << endl;
         }
         else {
-            cout << "El jugador " << player << " ha sacado un K.\nTiene un total de " << totalPoints << endl;           
+            cout << "El jugador " << player << " ha sacado un K de " << tipoPalo << " .\nTiene un total de " << totalPoints << endl;
         }
     }
 
-
-    else if(cartaInicial >= 2 && cartaInicial <= 10) {
+    else if (cartaInicial >= 2 && cartaInicial <= 10) {
         totalPoints += cartaInicial + 1;
         cout << "El jugador " << player << " ha sacado un " << cartaInicial + 1 << " de " << tipoPalo << ".\nTiene un total de " << totalPoints << " puntos en su mano." << endl;
     }
 }
-
 
 bool checkPoints(int& points, bool& winner, bool& loser) {
     if (points == 21) {
@@ -174,7 +139,6 @@ bool checkPoints(int& points, bool& winner, bool& loser) {
     }
     return false;
 }
-
 
 int main() {
     Start();
@@ -198,10 +162,10 @@ int main() {
         //Comienza el juego con el jugador 1
         while (choice != 1 && choice != 2) {
             cout << "Tienes " << puntosJugador1 << " puntos en total.\nQuieres pedir carta?" << endl;
-            
+
             cout << "1.- Si" << endl;
             cout << "2.- No" << endl;
-         
+
             cin >> choice;
             if (choice != 1 && choice != 2) {
                 cout << "Por favor, elije una opción valida." << endl;
